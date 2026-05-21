@@ -1,0 +1,12 @@
+.MuiToolbar-root p {
+    cursor: pointer;
+}
+
+.MuiToolbar-root p:hover {
+    color: #0793a6;
+}
+
+.header-toolbar {
+    min-height: 90px !important;
+    height: 90px;
+}

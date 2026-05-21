@@ -1,0 +1,8 @@
+/* BannerCarousel.css
+   All component styles are now colocated inside BannerCarousel.jsx via <style>.
+   This file is kept only for any global overrides you may need.
+*/
+
+/* Swiper internal overrides (can't be scoped in JSX) */
+.bc-swiper .swiper-wrapper { align-items: stretch; }
+.bc-pagination.swiper-pagination { position: absolute !important; }
