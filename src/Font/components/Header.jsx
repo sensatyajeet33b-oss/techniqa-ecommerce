@@ -3,6 +3,10 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { createPortal } from "react-dom";
 import Logo from "../assets/logo.png";
 import { getWishlist } from "../../utils/wishlist";
+import {
+    getCurrentUser,
+    logoutUser,
+} from "../../utils/auth";
 
 /* ─────────────────────────────────────────────────────────────
    DATA
@@ -78,6 +82,8 @@ export default function Header() {
     const [toast, setToast] = useState(null);
     const [cartShake, setCartShake] = useState(false);
     const [recentSearches, setRecentSearches] = useState([]);
+    const [currentUser, setCurrentUser] = useState(getCurrentUser());
+    const [showUserMenu, setShowUserMenu] = useState(false);
 
     /* Refs */
     const megaRef = useRef(null);
@@ -191,6 +197,20 @@ export default function Header() {
     const toFreeShip = Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal);
     const freeShipPct = Math.min(100, (subtotal / FREE_SHIPPING_THRESHOLD) * 100);
 
+    const handleLogout = () => {
+
+        logoutUser();
+        window.dispatchEvent(
+            new Event("authChanged")
+        );
+        setCurrentUser(null);
+
+        setShowUserMenu(false);
+
+        navigate("/login");
+
+    };
+
     const updateCart = (nc) => {
 
         localStorage.setItem(
@@ -237,6 +257,28 @@ export default function Header() {
         { label: "About Us", to: "/about-us" },
         { label: "Contact", to: "/contact" },
     ];
+
+
+    useEffect(() => {
+
+        const syncUser = () => {
+            setCurrentUser(
+                getCurrentUser()
+            );
+        };
+
+        window.addEventListener(
+            "authChanged",
+            syncUser
+        );
+
+        return () =>
+            window.removeEventListener(
+                "authChanged",
+                syncUser
+            );
+
+    }, []);
 
     /* ─────────────────────────────────────────────────────── */
     return (
@@ -359,6 +401,84 @@ export default function Header() {
 
 .hdr-utility-link:hover {
     color: var(--brand);
+}
+
+
+.hdr-user-wrap {
+  position: relative;
+}
+
+.hdr-user-dropdown {
+
+  position: absolute;
+
+  top: calc(100% + 3px);
+  right: 0;
+
+  width: 220px;
+
+  background: white;
+
+  border: 1px solid var(--border);
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 20px 40px rgba(15,23,42,.12);
+
+  overflow: hidden;
+
+  z-index: 2000;
+
+  animation: hdrDropdown .22s ease;
+}
+
+@keyframes hdrDropdown {
+
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hdr-user-dropdown button {
+
+  width: 100%;
+
+  border: none;
+  background: none;
+
+  padding: 14px 18px;
+
+  text-align: left;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.hdr-user-dropdown button:hover {
+
+  background:
+    rgba(6,182,212,.08);
+
+  color: var(--brand);
+}
+
+.hdr-user-dropdown .logout:hover {
+
+  background:
+    rgba(239,68,68,.08);
+
+  color: #ef4444;
 }
 
 /* ── STICKY WRAPPER ── */
@@ -2344,11 +2464,99 @@ export default function Header() {
 
                         {/* Actions */}
                         <div className="hdr-actions">
-                            <button className="hdr-action-btn" onClick={() => navigate("/login")}>
-                                <i className="ri-user-3-line" /><span className="hdr-action-label">Account</span>
-                            </button>
+                            <div
+                                className="hdr-user-wrap"
+
+                                onMouseEnter={() =>
+                                    setShowUserMenu(true)
+                                }
+
+                                onMouseLeave={() =>
+                                    setShowUserMenu(false)
+                                }
+                            >
+
+                                <button
+                                    className="hdr-action-btn"
+                                     
+                                >
+
+                                    <i className="ri-user-line" />
+
+                                    <span className="hdr-action-label">
+
+                                        {currentUser
+                                            ? `Hi, ${currentUser.name}`
+                                            : "Account"}
+
+                                    </span>
+
+                                </button>
+
+                                {showUserMenu && (
+
+                                    <div className="hdr-user-dropdown">
+
+                                        {!currentUser ? (
+
+                                            <>
+
+                                                <button
+                                                    onClick={() => navigate("/login")}
+                                                >
+                                                    Login
+                                                </button>
+
+                                                <button
+                                                    onClick={() => navigate("/register")}
+                                                >
+                                                    Register
+                                                </button>
+
+                                            </>
+
+                                        ) : (
+
+                                            <>
+
+                                                <button>
+                                                    My Profile
+                                                </button>
+
+                                                <button>
+                                                    My Addresses
+                                                </button>
+
+                                                <button
+                                                    onClick={() =>
+                                                        navigate("/wishlist")
+                                                    }
+                                                >
+                                                    Wishlist
+                                                </button>
+
+                                                <button>
+                                                    Orders
+                                                </button>
+
+                                                <button
+                                                    onClick={handleLogout}
+                                                    className="logout"
+                                                >
+                                                    Logout
+                                                </button>
+
+                                            </>
+
+                                        )}
+
+                                    </div>
+
+                                )}
+
+                            </div>
                             <div className="hdr-divider" />
-                            <button
+                            {/* <button
                                 className="hdr-action-btn"
                                 style={{ position: "relative" }}
                                 onClick={() => navigate("/wishlist")}
@@ -2364,7 +2572,7 @@ export default function Header() {
                                         {wishlistCount}
                                     </span>
                                 )}
-                            </button>
+                            </button> */}
                             <button className={`hdr-action-btn${cartShake ? " hdr-cart-shake" : ""}`} style={{ position: "relative" }} onClick={() => setCartOpen(true)}>
                                 <i className="ri-shopping-cart-2-line" />
                                 <span className="hdr-action-label">Cart</span>

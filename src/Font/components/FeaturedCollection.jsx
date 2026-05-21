@@ -58,21 +58,19 @@ export default function FeaturedCollection() {
     const cart =
       JSON.parse(localStorage.getItem("cart") || "[]");
 
-    const existing =
-      cart.findIndex((i) => i.id === product.id);
+    const numericPrice = parseInt(product.price.replace(/[^\d]/g, "")) || 0;
+
+    const existing = cart.findIndex((i) => i.id === product.id);
 
     if (existing > -1) {
-
-      cart[existing].qty =
-        (cart[existing].qty || 1) + 1;
-
+      cart[existing].qty = (cart[existing].qty || 1) + 1;
+      cart[existing].price = cart[existing].price || numericPrice; // ensure price is always a number
     } else {
-
       cart.push({
         ...product,
+        price: numericPrice,
         qty: 1
       });
-
     }
 
     localStorage.setItem(

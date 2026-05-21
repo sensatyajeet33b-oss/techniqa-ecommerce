@@ -26,6 +26,7 @@
    ================================================================ */
 
 .wl-page {
+  margin-top: 5%;
   font-family: var(--wl-font-b);
   min-height: 100vh;
   background:

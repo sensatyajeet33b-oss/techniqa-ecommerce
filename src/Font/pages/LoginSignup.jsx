@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Logo from "../assets/logo.png";
 
+import {
+  loginUser,
+  registerUser,
+} from "../../utils/auth";
+
 const LoginSignup = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [emailFocused, setEmailFocused] = useState(false);
 
   const {
@@ -14,22 +21,71 @@ const LoginSignup = () => {
   } = useForm({ mode: "onChange" });
 
   const onSubmit = async (data) => {
-    console.log(data);
-    await new Promise((r) => setTimeout(r, 1000));
-    navigate("/login");
+
+    await new Promise((r) =>
+      setTimeout(r, 800)
+    );
+
+    if (isSignup) {
+
+      const result = registerUser({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      });
+
+      if (!result.success) {
+        alert(result.message);
+        return;
+      }
+
+      alert("Account created successfully!");
+
+      setIsSignup(false);
+
+      return;
+    }
+
+    const result = loginUser(
+      data.email,
+      data.password
+    );
+
+    if (!result.success) {
+      alert(result.message);
+      return;
+    }
+
+    alert("Login successful!");
+
+    const redirectTo =
+      localStorage.getItem("postLoginRedirect") ||
+      location.state?.from ||
+      "/";
+
+    localStorage.removeItem("postLoginRedirect");
+
+    navigate(redirectTo);
   };
 
   const TRUST = [
     { icon: "ri-shield-check-line", text: "Certified HVAC Products" },
-    { icon: "ri-truck-line",         text: "Nationwide Fast Delivery" },
-    { icon: "ri-lock-2-line",        text: "Secure & Encrypted Orders" },
+    { icon: "ri-truck-line", text: "Nationwide Fast Delivery" },
+    { icon: "ri-lock-2-line", text: "Secure & Encrypted Orders" },
     { icon: "ri-customer-service-2-line", text: "Expert Technical Support" },
   ];
 
   const SOCIALS = [
-    { icon: "ri-google-fill",   label: "Continue with Google",   color: "#ea4335" },
-    { icon: "ri-linkedin-fill", label: "Continue with LinkedIn",  color: "#0077b5" },
+    { icon: "ri-google-fill", label: "Continue with Google", color: "#ea4335" },
+    { icon: "ri-linkedin-fill", label: "Continue with LinkedIn", color: "#0077b5" },
   ];
+
+  const [isSignup, setIsSignup] = useState(false);
+  const [passwordFocused, setPasswordFocused] =
+    useState(false);
+
+  const [nameFocused, setNameFocused] =
+    useState(false);
 
   return (
     <>
@@ -475,7 +531,7 @@ const LoginSignup = () => {
           <div className="ls-left-bottom">
             {[
               { val: "500+", label: "Products" },
-              { val: "15+",  label: "Years" },
+              { val: "15+", label: "Years" },
               { val: "24/7", label: "Support" },
             ].map((s) => (
               <div key={s.label}>
@@ -502,8 +558,16 @@ const LoginSignup = () => {
             <img src={Logo} alt="Logo" className="ls-card-logo" />
 
             {/* Heading */}
-            <h2 className="ls-card-heading">Welcome Back</h2>
-            <p className="ls-card-sub">Sign in to your Tecniqa account to continue</p>
+            <h2 className="ls-card-heading">
+              {isSignup
+                ? "Create Account"
+                : "Welcome Back"}
+            </h2>
+            <p className="ls-card-sub">
+              {isSignup
+                ? "Create your Tecniqa account"
+                : "Sign in to your Tecniqa account to continue"}
+            </p>
 
             {/* Social logins */}
             <div className="ls-socials">
@@ -524,6 +588,39 @@ const LoginSignup = () => {
 
             {/* Form */}
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
+
+              {isSignup && (
+                <>
+                  <label className="ls-label">
+                    Full Name
+                  </label>
+
+                  <div className={`ls-input-wrap${nameFocused ? " focused" : ""}`}>
+                    <i className="ri-user-3-line ls-input-icon" />
+
+                    <input
+                      type="text"
+                      className={`ls-input${errors.name ? " error" : ""}`}
+                      placeholder="Enter your full name"
+                      onFocus={() => setNameFocused(true)}
+                      onBlur={() => setNameFocused(false)}
+                      {...register("name", {
+                        required: isSignup
+                          ? "Name is required"
+                          : false,
+                      })}
+                    />
+                  </div>
+
+                  {errors.name && (
+                    <div className="ls-error-msg">
+                      <i className="ri-error-warning-line" />
+                      {errors.name.message}
+                    </div>
+                  )}
+                </>
+              )}
+              {/* EMAIL FIELD */}
               <label className="ls-label" htmlFor="email">Email Address</label>
 
               <div className={`ls-input-wrap${emailFocused ? " focused" : ""}`}>
@@ -552,15 +649,82 @@ const LoginSignup = () => {
                 </div>
               )}
 
+              <label className="ls-label">
+                Password
+              </label>
+
+              <div className={`ls-input-wrap${passwordFocused ? " focused" : ""}`}>
+                <i className="ri-lock-line ls-input-icon" />
+
+                <input
+                  type="password"
+                  className={`ls-input${errors.password ? " error" : ""}`}
+                  placeholder="Enter your password"
+                  onFocus={() => setPasswordFocused(true)}
+                  onBlur={() => setPasswordFocused(false)}
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message:
+                        "Password must be at least 6 characters",
+                    },
+                  })}
+                />
+              </div>
+
+              {errors.password && (
+                <div className="ls-error-msg">
+                  <i className="ri-error-warning-line" />
+                  {errors.password.message}
+                </div>
+              )}
+
               <button
                 type="submit"
                 className="ls-submit"
                 disabled={isSubmitting}
                 style={{ marginTop: 20 }}
               >
-                {isSubmitting ? "Please wait…" : "Continue to Tecniqa →"}
+                {isSubmitting
+                  ? "Please wait…"
+                  : isSignup
+                    ? "Create Account →"
+                    : "Login to Tecniqa →"}
               </button>
             </form>
+
+            <div
+              style={{
+                textAlign: "center",
+                marginTop: 16,
+                fontSize: 14,
+                color: "#64748b",
+              }}
+            >
+              {isSignup
+                ? "Already have an account?"
+                : "Don't have an account?"}
+
+              <button
+                type="button"
+                onClick={() =>
+                  setIsSignup(!isSignup)
+                }
+                style={{
+                  border: "none",
+                  background: "none",
+                  color: "#06b6d4",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  marginLeft: 6,
+                }}
+              >
+                {isSignup
+                  ? "Login"
+                  : "Create Account"}
+              </button>
+            </div>
 
             {/* Terms */}
             <p className="ls-terms">
