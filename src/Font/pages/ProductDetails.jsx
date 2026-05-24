@@ -250,6 +250,13 @@ export default function ProductDetails() {
     return () => obs.disconnect();
   }, []);
 
+    useEffect(() => {
+  
+      document.title =
+        "Product Details | Tecniqa";
+  
+    }, []);
+
   if (!product) {
     return (
       <div style={{ padding: "80px 5%", fontFamily: "DM Sans,sans-serif", textAlign: "center" }}>

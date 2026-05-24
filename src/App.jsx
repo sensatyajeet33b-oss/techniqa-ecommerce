@@ -7,6 +7,7 @@ import UserRoutes from "./Routes/UserRoutes";
 import FontRoutes from "./Routes/FontRoutes";
 
 import ScrollToTop from "./Font/components/ScrollToTop";
+import NotFound from "./Font/pages/NotFound";
 
 function App() {
   return (
@@ -42,16 +43,28 @@ function App() {
 
       <Routes>
 
-        {/* ADMIN ROUTES */}
-        <Route path="/admin/*" element={<AdminRoutes />} />
+        <Route
+          path="/admin/*"
+          element={<AdminRoutes />}
+        />
 
-        {/* USER ROUTES */}
-        <Route path="/user/*" element={<UserRoutes />} />
+        <Route
+          path="/user/*"
+          element={<UserRoutes />}
+        />
 
-        {/* FRONT WEBSITE ROUTES */}
-        <Route path="/*" element={<FontRoutes />} />
+        <Route
+          path="/*"
+          element={<FontRoutes />}
+        />
+
+        <Route
+          path="*"
+          element={<NotFound />}
+        />
 
       </Routes>
+
 
     </BrowserRouter>
   );

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   useNavigate,
   useLocation,
@@ -95,6 +96,24 @@ export default function UserDashboard() {
     state: "",
     pincode: "",
   });
+
+  useEffect(() => {
+
+    const titles = {
+
+      dashboard: "Dashboard",
+      orders: "Orders",
+      wishlist: "Wishlist",
+      addresses: "Addresses",
+      profile: "Profile",
+      orderdetail: "Order Details",
+
+    };
+
+    document.title =
+      `${titles[section] || "Dashboard"} | Tecniqa`;
+
+  }, [section]);
 
   /* ─────────────────────────────────────────
      AUTH CHECK
@@ -476,7 +495,39 @@ export default function UserDashboard() {
 
         {/* MAIN */}
         <main className="ud-content">
-          {renderContent()}
+
+          <AnimatePresence mode="wait">
+
+            <motion.div
+              key={section}
+
+              initial={{
+                opacity: 0,
+                y: 16,
+              }}
+
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+
+              exit={{
+                opacity: 0,
+                y: -12,
+              }}
+
+              transition={{
+                duration: 0.28,
+                ease: "easeOut",
+              }}
+            >
+
+              {renderContent()}
+
+            </motion.div>
+
+          </AnimatePresence>
+
         </main>
 
       </div>

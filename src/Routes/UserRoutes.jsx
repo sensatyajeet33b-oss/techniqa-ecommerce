@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import UserDashboard from "../user/pages/UserDashboard";
 import { getCurrentUser } from "../utils/auth";
-
+import NotFound from "../Font/pages/NotFound";
 export default function UserRoutes() {
 
   const user = getCurrentUser();
@@ -25,6 +25,11 @@ export default function UserRoutes() {
             ? <UserDashboard />
             : <Navigate to="/login" replace />
         }
+      />
+
+      <Route
+        path="*"
+        element={<NotFound />}
       />
 
     </Routes>

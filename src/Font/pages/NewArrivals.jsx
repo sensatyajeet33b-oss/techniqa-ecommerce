@@ -282,6 +282,12 @@ function ProductCard({ product, delay }) {
 export default function NewArrivals() {
     const navigate = useNavigate();
     const [activeFilter, setActiveFilter] = useState("All");
+      useEffect(() => {
+    
+        document.title =
+          "New Arrivals | Tecniqa";
+    
+      }, []);
 
     const filtered =
         activeFilter === "All"

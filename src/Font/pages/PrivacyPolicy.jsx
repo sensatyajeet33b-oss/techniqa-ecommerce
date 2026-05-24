@@ -3,91 +3,97 @@
 import React, { useEffect } from "react";
 
 const sections = [
-    {
-        num: "01",
-        icon: "ri-information-line",
-        title: "Information We Collect",
-        text:
-            "We collect information you provide directly when creating an account, placing orders, or contacting support. This may include your name, email address, phone number, shipping address, and payment details.",
-        bullets: [
-            "Account registration details including name, email, and password",
-            "Order history and transaction information",
-            "Device and browser information for security monitoring",
-            "Platform usage activity to improve user experience",
-        ],
-    },
-    {
-        num: "02",
-        icon: "ri-settings-3-line",
-        title: "How We Use Your Information",
-        text:
-            "Your information is used exclusively to provide, improve, and personalize the Tecniqa platform experience. We never sell your personal data to third parties.",
-        bullets: [
-            "Processing orders and managing deliveries",
-            "Sending order confirmations and customer support updates",
-            "Improving search, recommendations, and platform performance",
-            "Fraud prevention and platform security monitoring",
-        ],
-    },
-    {
-        num: "03",
-        icon: "ri-shield-keyhole-line",
-        title: "Data Protection & Security",
-        text:
-            "Tecniqa implements industry-standard security practices including encrypted communication, protected servers, and access-controlled infrastructure to safeguard your information.",
-        bullets: [
-            "AES-256 encrypted data protection",
-            "TLS-secured communication channels",
-            "Access-controlled internal systems",
-            "Regular security monitoring and audits",
-        ],
-    },
-    {
-        num: "04",
-        icon: "ri-share-circle-line",
-        title: "Data Sharing",
-        text:
-            "Your information is shared only with trusted service providers essential for operating our platform such as logistics partners, payment gateways, and technical infrastructure providers.",
-    },
-    {
-        num: "05",
-        icon: "ri-user-settings-line",
-        title: "Your Rights",
-        text:
-            "You have the right to access, modify, or request deletion of your personal information at any time in accordance with applicable privacy regulations.",
-        bullets: [
-            "Right to access your personal information",
-            "Right to update incorrect data",
-            "Right to request account and data deletion",
-            "Right to opt out of marketing communications",
-        ],
-    },
-    {
-        num: "06",
-        icon: "ri-mail-send-line",
-        title: "Contact Us",
-        text:
-            "If you have questions, concerns, or requests regarding this Privacy Policy or your personal data, our support team is available to assist you.",
-        contact: true,
-    },
+  {
+    num: "01",
+    icon: "ri-information-line",
+    title: "Information We Collect",
+    text:
+      "We collect information you provide directly when creating an account, placing orders, or contacting support. This may include your name, email address, phone number, shipping address, and payment details.",
+    bullets: [
+      "Account registration details including name, email, and password",
+      "Order history and transaction information",
+      "Device and browser information for security monitoring",
+      "Platform usage activity to improve user experience",
+    ],
+  },
+  {
+    num: "02",
+    icon: "ri-settings-3-line",
+    title: "How We Use Your Information",
+    text:
+      "Your information is used exclusively to provide, improve, and personalize the Tecniqa platform experience. We never sell your personal data to third parties.",
+    bullets: [
+      "Processing orders and managing deliveries",
+      "Sending order confirmations and customer support updates",
+      "Improving search, recommendations, and platform performance",
+      "Fraud prevention and platform security monitoring",
+    ],
+  },
+  {
+    num: "03",
+    icon: "ri-shield-keyhole-line",
+    title: "Data Protection & Security",
+    text:
+      "Tecniqa implements industry-standard security practices including encrypted communication, protected servers, and access-controlled infrastructure to safeguard your information.",
+    bullets: [
+      "AES-256 encrypted data protection",
+      "TLS-secured communication channels",
+      "Access-controlled internal systems",
+      "Regular security monitoring and audits",
+    ],
+  },
+  {
+    num: "04",
+    icon: "ri-share-circle-line",
+    title: "Data Sharing",
+    text:
+      "Your information is shared only with trusted service providers essential for operating our platform such as logistics partners, payment gateways, and technical infrastructure providers.",
+  },
+  {
+    num: "05",
+    icon: "ri-user-settings-line",
+    title: "Your Rights",
+    text:
+      "You have the right to access, modify, or request deletion of your personal information at any time in accordance with applicable privacy regulations.",
+    bullets: [
+      "Right to access your personal information",
+      "Right to update incorrect data",
+      "Right to request account and data deletion",
+      "Right to opt out of marketing communications",
+    ],
+  },
+  {
+    num: "06",
+    icon: "ri-mail-send-line",
+    title: "Contact Us",
+    text:
+      "If you have questions, concerns, or requests regarding this Privacy Policy or your personal data, our support team is available to assist you.",
+    contact: true,
+  },
 ];
 
 const trustItems = [
-    "Secure Data Handling",
-    "GDPR Compliant",
-    "Encrypted Infrastructure",
-    "Trusted Platform",
+  "Secure Data Handling",
+  "GDPR Compliant",
+  "Encrypted Infrastructure",
+  "Trusted Platform",
 ];
 
 export default function PrivacyPolicy() {
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  useEffect(() => {
 
-    return (
-        <>
-            <style>{`
+    document.title =
+      "Privacy Policy | Tecniqa";
+
+  }, []);
+
+  return (
+    <>
+      <style>{`
 
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap');
         @import url('https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css');
@@ -384,121 +390,121 @@ export default function PrivacyPolicy() {
 
       `}</style>
 
-            <div className="pp-page">
+      <div className="pp-page">
 
-                {/* HERO */}
+        {/* HERO */}
 
-                <section className="pp-hero">
+        <section className="pp-hero">
 
-                    <div className="pp-grid"></div>
+          <div className="pp-grid"></div>
 
-                    <div className="pp-badge">
-                        <i className="ri-shield-check-line"></i>
-                        Privacy & Data Protection
+          <div className="pp-badge">
+            <i className="ri-shield-check-line"></i>
+            Privacy & Data Protection
+          </div>
+
+          <h1 className="pp-title">
+            Privacy Policy
+          </h1>
+
+          <p className="pp-sub">
+            Tecniqa values your privacy and is committed to protecting
+            your personal information through secure, transparent,
+            and industry-standard data practices.
+          </p>
+
+        </section>
+
+        {/* TRUST STRIP */}
+
+        <div className="pp-trust">
+
+          {trustItems.map((item, index) => (
+            <div className="pp-trust-item" key={index}>
+              <i className="ri-checkbox-circle-line"></i>
+              {item}
+            </div>
+          ))}
+
+        </div>
+
+        {/* CONTENT */}
+
+        <div className="pp-container">
+
+          {sections.map((section, index) => (
+
+            <div className="pp-section" key={index}>
+
+              <div className="pp-section-top">
+
+                <div className="pp-icon">
+                  <i className={section.icon}></i>
+                </div>
+
+                <div>
+                  <div className="pp-section-num">
+                    Section {section.num}
+                  </div>
+
+                  <h2>{section.title}</h2>
+                </div>
+
+              </div>
+
+              <p>{section.text}</p>
+
+              {section.bullets && (
+
+                <div className="pp-list">
+
+                  {section.bullets.map((bullet, idx) => (
+                    <div className="pp-list-item" key={idx}>
+                      <i className="ri-checkbox-circle-line"></i>
+                      <span>{bullet}</span>
                     </div>
-
-                    <h1 className="pp-title">
-                        Privacy Policy
-                    </h1>
-
-                    <p className="pp-sub">
-                        Tecniqa values your privacy and is committed to protecting
-                        your personal information through secure, transparent,
-                        and industry-standard data practices.
-                    </p>
-
-                </section>
-
-                {/* TRUST STRIP */}
-
-                <div className="pp-trust">
-
-                    {trustItems.map((item, index) => (
-                        <div className="pp-trust-item" key={index}>
-                            <i className="ri-checkbox-circle-line"></i>
-                            {item}
-                        </div>
-                    ))}
+                  ))}
 
                 </div>
 
-                {/* CONTENT */}
+              )}
 
-                <div className="pp-container">
+              {section.contact && (
 
-                    {sections.map((section, index) => (
+                <div className="pp-contact-card">
 
-                        <div className="pp-section" key={index}>
+                  <a
+                    href="mailto:support@tecniqa.com"
+                    className="pp-contact-item"
+                  >
+                    <i className="ri-mail-line"></i>
+                    support@tecniqa.com
+                  </a>
 
-                            <div className="pp-section-top">
+                  <a
+                    href="tel:+919668246683"
+                    className="pp-contact-item"
+                  >
+                    <i className="ri-phone-line"></i>
+                    +91 9668246683
+                  </a>
 
-                                <div className="pp-icon">
-                                    <i className={section.icon}></i>
-                                </div>
-
-                                <div>
-                                    <div className="pp-section-num">
-                                        Section {section.num}
-                                    </div>
-
-                                    <h2>{section.title}</h2>
-                                </div>
-
-                            </div>
-
-                            <p>{section.text}</p>
-
-                            {section.bullets && (
-
-                                <div className="pp-list">
-
-                                    {section.bullets.map((bullet, idx) => (
-                                        <div className="pp-list-item" key={idx}>
-                                            <i className="ri-checkbox-circle-line"></i>
-                                            <span>{bullet}</span>
-                                        </div>
-                                    ))}
-
-                                </div>
-
-                            )}
-
-                            {section.contact && (
-
-                                <div className="pp-contact-card">
-
-                                    <a
-                                        href="mailto:support@tecniqa.com"
-                                        className="pp-contact-item"
-                                    >
-                                        <i className="ri-mail-line"></i>
-                                        support@tecniqa.com
-                                    </a>
-
-                                    <a
-                                        href="tel:+919668246683"
-                                        className="pp-contact-item"
-                                    >
-                                        <i className="ri-phone-line"></i>
-                                        +91 9668246683
-                                    </a>
-
-                                    <div className="pp-contact-item">
-                                        <i className="ri-map-pin-line"></i>
-                                        DLF Cyber City, Bhubaneswar
-                                    </div>
-
-                                </div>
-
-                            )}
-
-                        </div>
-
-                    ))}
+                  <div className="pp-contact-item">
+                    <i className="ri-map-pin-line"></i>
+                    DLF Cyber City, Bhubaneswar
+                  </div>
 
                 </div>
+
+              )}
 
             </div>
-        </>
-    );
+
+          ))}
+
+        </div>
+
+      </div>
+    </>
+  );
 }

@@ -316,6 +316,12 @@ function ProductBlock({ product }) {
   const [toast, setToast] = useState(false);
 
   const [toastMsg, setToastMsg] = useState("");
+    useEffect(() => {
+  
+      document.title =
+        "Product Details | Tecniqa";
+  
+    }, []);
 
   /* Entry animation */
   useEffect(() => {

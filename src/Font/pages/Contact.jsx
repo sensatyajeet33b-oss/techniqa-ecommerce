@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
@@ -11,6 +11,13 @@ export default function Contact() {
     setSent(true);
     setTimeout(() => setSent(false), 3000);
   };
+
+  useEffect(() => {
+
+    document.title =
+      "Contact Us | Tecniqa";
+
+  }, []);
 
   return (
     <>
@@ -387,10 +394,10 @@ export default function Contact() {
           {/* ── QUICK-INFO CARDS ── */}
           <div className="ct-info-grid">
             {[
-              { icon: "ri-mail-line",              title: "Email Us",      val: "support@tecniqa.com",        href: "mailto:support@tecniqa.com" },
-              { icon: "ri-phone-line",             title: "Call Us",       val: "+91 9668 246 683",           href: "tel:+919668246683" },
-              { icon: "ri-map-pin-2-line",         title: "Visit Us",      val: "DLF Cyber City, Bhubaneswar", href: "https://www.google.com/maps?q=DLF+Cyber+City+Bhubaneswar" },
-              { icon: "ri-customer-service-2-line",title: "24/7 Support",  val: "Always here for you",        href: "mailto:support@tecniqa.com" },
+              { icon: "ri-mail-line", title: "Email Us", val: "support@tecniqa.com", href: "mailto:support@tecniqa.com" },
+              { icon: "ri-phone-line", title: "Call Us", val: "+91 9668 246 683", href: "tel:+919668246683" },
+              { icon: "ri-map-pin-2-line", title: "Visit Us", val: "DLF Cyber City, Bhubaneswar", href: "https://www.google.com/maps?q=DLF+Cyber+City+Bhubaneswar" },
+              { icon: "ri-customer-service-2-line", title: "24/7 Support", val: "Always here for you", href: "mailto:support@tecniqa.com" },
             ].map((c) => (
               <a key={c.title} href={c.href} target={c.href.startsWith("http") ? "_blank" : "_self"} rel="noopener noreferrer" className="ct-info-card">
                 <div className="ct-info-icon"><i className={c.icon} /></div>
@@ -416,10 +423,10 @@ export default function Contact() {
 
                 <div className="ct-contact-rows">
                   {[
-                    { icon: "ri-phone-line",       label: "Phone",   val: "+91 9668 246 683" },
-                    { icon: "ri-mail-line",        label: "Email",   val: "support@tecniqa.com" },
-                    { icon: "ri-map-pin-2-line",   label: "Address", val: "DLF Cyber City,\nBhubaneswar, Odisha" },
-                    { icon: "ri-time-line",        label: "Hours",   val: "Mon–Sat: 9am – 7pm\n24/7 Email Support" },
+                    { icon: "ri-phone-line", label: "Phone", val: "+91 9668 246 683" },
+                    { icon: "ri-mail-line", label: "Email", val: "support@tecniqa.com" },
+                    { icon: "ri-map-pin-2-line", label: "Address", val: "DLF Cyber City,\nBhubaneswar, Odisha" },
+                    { icon: "ri-time-line", label: "Hours", val: "Mon–Sat: 9am – 7pm\n24/7 Email Support" },
                   ].map((r) => (
                     <div className="ct-contact-row" key={r.label}>
                       <div className="ct-contact-ico"><i className={r.icon} /></div>

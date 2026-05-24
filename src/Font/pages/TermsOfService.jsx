@@ -98,6 +98,13 @@ export default function TermsOfService() {
         window.scrollTo(0, 0);
     }, []);
 
+      useEffect(() => {
+    
+        document.title =
+          "Terms Of Service | Tecniqa";
+    
+      }, []);
+
     return (
         <>
             <style>{`

@@ -57,6 +57,13 @@ export default function WarrantyPolicy() {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+    
+      useEffect(() => {
+    
+        document.title =
+          "Warranty | Tecniqa";
+    
+      }, []);
 
     return (
         <>

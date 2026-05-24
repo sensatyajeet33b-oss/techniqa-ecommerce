@@ -814,8 +814,7 @@ const genOrderId = () => "TEC" + Math.random().toString(36).substr(2, 7).toUpper
 export default function Checkout() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [currentUser, setCurrentUser] =
-    useState(getCurrentUser());
+  const [currentUser, setCurrentUser] = useState(getCurrentUser());
   const [step, setStep] = useState(0);
   const [cart, setCart] = useState([]);
   const [processing, setProcessing] = useState(false);
@@ -829,6 +828,13 @@ export default function Checkout() {
   const [discount, setDiscount] = useState(0);
   const [couponMessage, setCouponMessage] = useState("");
   const [appliedCoupon, setAppliedCoupon] = useState(null);
+
+    useEffect(() => {
+  
+      document.title =
+        "Checkout | Tecniqa";
+  
+    }, []);
 
   const [addressData, setAddressData] = useState({
     fullName: "",

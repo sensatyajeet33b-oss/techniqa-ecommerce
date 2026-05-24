@@ -11,7 +11,7 @@ function fmt(val) {
 }
 
 function discountPct(price, oldPrice) {
-  const p = typeof price    === "number" ? price    : Number(String(price    || "").replace(/[₹Rs.,\s]/g, ""));
+  const p = typeof price === "number" ? price : Number(String(price || "").replace(/[₹Rs.,\s]/g, ""));
   const o = typeof oldPrice === "number" ? oldPrice : Number(String(oldPrice || "").replace(/[₹Rs.,\s]/g, ""));
   if (!o || o <= p) return 0;
   return Math.round((1 - p / o) * 100);
@@ -20,7 +20,7 @@ function discountPct(price, oldPrice) {
 function Stars({ r = 4.8 }) {
   const f = Math.floor(r), h = r % 1 >= 0.5;
   return (
-    <span style={{ color:"#f59e0b", fontSize:12, letterSpacing:1 }}>
+    <span style={{ color: "#f59e0b", fontSize: 12, letterSpacing: 1 }}>
       {"★".repeat(f)}{h ? "½" : ""}{"☆".repeat(5 - f - (h ? 1 : 0))}
     </span>
   );
@@ -48,7 +48,7 @@ function WishlistCard({ item, onRemove, onMoveToCart, delay }) {
   const pct = discountPct(item.price, item.oldPrice);
 
   return (
-    <div ref={ref} className={`wl-card${vis ? " wl-vis" : ""}`} style={{ transitionDelay:`${delay}ms` }}>
+    <div ref={ref} className={`wl-card${vis ? " wl-vis" : ""}`} style={{ transitionDelay: `${delay}ms` }}>
 
       {/* Saved badge */}
       <span className="wl-saved-badge">
@@ -68,7 +68,7 @@ function WishlistCard({ item, onRemove, onMoveToCart, delay }) {
       <div className="wl-card-img">
         {item.image
           ? <img src={item.image} alt={item.title} />
-          : <i className="ri-image-line" style={{ fontSize:40, color:"rgba(6,182,212,0.3)" }} />
+          : <i className="ri-image-line" style={{ fontSize: 40, color: "rgba(6,182,212,0.3)" }} />
         }
       </div>
 
@@ -93,7 +93,7 @@ function WishlistCard({ item, onRemove, onMoveToCart, delay }) {
 
         {/* Stars */}
         {item.rating && (
-          <div style={{ display:"flex", alignItems:"center", gap:5, fontSize:12, color:"#64748b" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 12, color: "#64748b" }}>
             <Stars r={item.rating} />
             <span>{item.rating} {item.reviews ? `(${item.reviews})` : ""}</span>
           </div>
@@ -102,8 +102,8 @@ function WishlistCard({ item, onRemove, onMoveToCart, delay }) {
         {/* Date saved */}
         {item.savedAt && (
           <span className="wl-saved-on">
-            <i className="ri-time-line" style={{ marginRight:3 }} />
-            Saved {new Date(item.savedAt).toLocaleDateString("en-IN", { day:"numeric", month:"short", year:"numeric" })}
+            <i className="ri-time-line" style={{ marginRight: 3 }} />
+            Saved {new Date(item.savedAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
           </span>
         )}
       </div>
@@ -127,9 +127,16 @@ function WishlistCard({ item, onRemove, onMoveToCart, delay }) {
 
 export default function Wishlist() {
   const navigate = useNavigate();
-  const [wishlist, setWishlist]   = useState([]);
-  const [toast,    setToast]      = useState(false);
-  const [toastMsg, setToastMsg]   = useState({ text:"", icon:"success" });
+  const [wishlist, setWishlist] = useState([]);
+  const [toast, setToast] = useState(false);
+  const [toastMsg, setToastMsg] = useState({ text: "", icon: "success" });
+
+  useEffect(() => {
+
+    document.title =
+      "Wishlist | Tecniqa";
+
+  }, []);
 
   /* Load */
   useEffect(() => {
@@ -163,12 +170,12 @@ export default function Wishlist() {
     else { cart.push({ title: item.title, image: item.image, price: numPrice, oldPrice: item.oldPrice, qty: 1 }); }
     localStorage.setItem("cart", JSON.stringify(cart));
     window.dispatchEvent(
-  new Event("cartUpdated")
-);
+      new Event("cartUpdated")
+    );
 
     // Remove from wishlist
     removeItem(item.id);
-    showToast(`${item.title?.slice(0,28)}… moved to cart`, "success");
+    showToast(`${item.title?.slice(0, 28)}… moved to cart`, "success");
   };
 
   return (

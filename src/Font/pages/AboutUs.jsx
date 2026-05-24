@@ -69,6 +69,13 @@ export default function AboutUs() {
     return () => io.disconnect();
   }, []);
 
+    useEffect(() => {
+  
+      document.title =
+        "About Us | Tecniqa";
+  
+    }, []);
+
   const obs = (i) => (el) => { sectionsRef.current[i] = el; };
 
   return (

@@ -74,6 +74,14 @@ export default function FeaturedProducts() {
     return () => io.disconnect();
   }, []);
 
+
+    useEffect(() => {
+  
+      document.title =
+        "Featured Products | Tecniqa";
+  
+    }, []);
+
   /* Filter + sort */
   const filtered = enriched
     .filter(p => cat === "All" || p.category === cat)

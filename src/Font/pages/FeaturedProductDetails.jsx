@@ -98,6 +98,12 @@ export default function FeaturedProductDetails() {
 
   /* Scroll to top */
   useEffect(() => { window.scrollTo(0, 0); }, []);
+    useEffect(() => {
+  
+      document.title =
+        "Featured Product | Tecniqa";
+  
+    }, []);
 
   /* Set initial image */
   useEffect(() => {

@@ -3,64 +3,71 @@
 import React, { useEffect } from "react";
 
 const sections = [
-    {
-        title: "Return Eligibility",
-        content:
-            "Customers may request a return within 7 days of delivery for eligible products purchased directly from Tecniqa or authorized sellers.",
-    },
-    {
-        title: "Product Condition",
-        content:
-            "Returned products must be unused, undamaged, and in original packaging with all accessories, manuals, labels, and invoices intact.",
-    },
-    {
-        title: "Non-returnable Items",
-        content:
-            "Installed products, chemicals, consumables, customized items, and products damaged after delivery are not eligible for return.",
-    },
-    {
-        title: "Damaged or Incorrect Products",
-        content:
-            "Customers receiving damaged, defective, or incorrect products must notify Tecniqa within 48 hours of delivery along with supporting images or videos.",
-    },
-    {
-        title: "Inspection & Approval",
-        content:
-            "All returned products are subject to technical inspection before approval of refunds, replacements, or exchanges.",
-    },
-    {
-        title: "Refund Process",
-        content:
-            "Approved refunds are processed within 5–7 business days through the original payment method or store credit, depending on the order type.",
-    },
-    {
-        title: "Shipping Responsibility",
-        content:
-            "Return shipping charges may apply unless the return is due to damaged, defective, or incorrectly delivered products.",
-    },
-    {
-        title: "Order Cancellation",
-        content:
-            "Orders may be cancelled before dispatch. Cancellation requests after shipment may not be accepted.",
-    },
+  {
+    title: "Return Eligibility",
+    content:
+      "Customers may request a return within 7 days of delivery for eligible products purchased directly from Tecniqa or authorized sellers.",
+  },
+  {
+    title: "Product Condition",
+    content:
+      "Returned products must be unused, undamaged, and in original packaging with all accessories, manuals, labels, and invoices intact.",
+  },
+  {
+    title: "Non-returnable Items",
+    content:
+      "Installed products, chemicals, consumables, customized items, and products damaged after delivery are not eligible for return.",
+  },
+  {
+    title: "Damaged or Incorrect Products",
+    content:
+      "Customers receiving damaged, defective, or incorrect products must notify Tecniqa within 48 hours of delivery along with supporting images or videos.",
+  },
+  {
+    title: "Inspection & Approval",
+    content:
+      "All returned products are subject to technical inspection before approval of refunds, replacements, or exchanges.",
+  },
+  {
+    title: "Refund Process",
+    content:
+      "Approved refunds are processed within 5–7 business days through the original payment method or store credit, depending on the order type.",
+  },
+  {
+    title: "Shipping Responsibility",
+    content:
+      "Return shipping charges may apply unless the return is due to damaged, defective, or incorrectly delivered products.",
+  },
+  {
+    title: "Order Cancellation",
+    content:
+      "Orders may be cancelled before dispatch. Cancellation requests after shipment may not be accepted.",
+  },
 ];
 
 const trustItems = [
-    "Easy Return Process",
-    "Secure Refund Handling",
-    "Professional HVAC Support",
-    "Trusted Industrial Products",
+  "Easy Return Process",
+  "Secure Refund Handling",
+  "Professional HVAC Support",
+  "Trusted Industrial Products",
 ];
 
 export default function ReturnPolicy() {
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-    return (
-        <>
-            <style>{`
+  useEffect(() => {
+
+    document.title =
+      "Return Policy | Tecniqa";
+
+  }, []);
+
+  return (
+    <>
+      <style>{`
         
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap');
 
@@ -339,89 +346,89 @@ export default function ReturnPolicy() {
 
       `}</style>
 
-            <div className="rp-page">
+      <div className="rp-page">
 
-                {/* HERO */}
-                <section className="rp-hero">
+        {/* HERO */}
+        <section className="rp-hero">
 
-                    <div className="rp-grid"></div>
+          <div className="rp-grid"></div>
 
-                    <div className="rp-badge">
-                        <i className="ri-arrow-go-back-line"></i>
-                        Returns & Refunds
-                    </div>
+          <div className="rp-badge">
+            <i className="ri-arrow-go-back-line"></i>
+            Returns & Refunds
+          </div>
 
-                    <h1 className="rp-title">
-                        Return Policy
-                    </h1>
+          <h1 className="rp-title">
+            Return Policy
+          </h1>
 
-                    <p className="rp-sub">
-                        Tecniqa strives to provide a smooth and transparent
-                        return experience while ensuring quality standards for
-                        industrial HVACR and refrigeration products.
-                    </p>
+          <p className="rp-sub">
+            Tecniqa strives to provide a smooth and transparent
+            return experience while ensuring quality standards for
+            industrial HVACR and refrigeration products.
+          </p>
 
-                </section>
+        </section>
 
-                {/* TRUST STRIP */}
-                <div className="rp-trust">
+        {/* TRUST STRIP */}
+        <div className="rp-trust">
 
-                    {trustItems.map((item, index) => (
-                        <div className="rp-trust-item" key={index}>
-                            <i className="ri-checkbox-circle-line"></i>
-                            {item}
-                        </div>
-                    ))}
+          {trustItems.map((item, index) => (
+            <div className="rp-trust-item" key={index}>
+              <i className="ri-checkbox-circle-line"></i>
+              {item}
+            </div>
+          ))}
 
+        </div>
+
+        {/* CONTENT */}
+        <div className="rp-container">
+
+          {sections.map((section, index) => (
+
+            <div className="rp-section" key={index}>
+
+              <div className="rp-section-top">
+
+                <div className="rp-icon">
+                  <i className="ri-file-list-3-line"></i>
                 </div>
 
-                {/* CONTENT */}
-                <div className="rp-container">
+                <h2>{section.title}</h2>
 
-                    {sections.map((section, index) => (
+              </div>
 
-                        <div className="rp-section" key={index}>
-
-                            <div className="rp-section-top">
-
-                                <div className="rp-icon">
-                                    <i className="ri-file-list-3-line"></i>
-                                </div>
-
-                                <h2>{section.title}</h2>
-
-                            </div>
-
-                            <p>{section.content}</p>
-
-                        </div>
-
-                    ))}
-
-                    {/* CONTACT */}
-
-                    <div className="rp-contact">
-
-                        <h3>Need Return Assistance?</h3>
-
-                        <p>
-                            Our support team is available to assist you with
-                            return requests, refunds, exchanges, and order-related queries.
-                        </p>
-
-                        <a
-                            href="/contact"
-                            className="rp-btn"
-                        >
-                            <i className="ri-customer-service-2-line"></i>
-                            Contact Support
-                        </a>
-
-                    </div>
-
-                </div>
+              <p>{section.content}</p>
 
             </div>
-        </>
-    );
+
+          ))}
+
+          {/* CONTACT */}
+
+          <div className="rp-contact">
+
+            <h3>Need Return Assistance?</h3>
+
+            <p>
+              Our support team is available to assist you with
+              return requests, refunds, exchanges, and order-related queries.
+            </p>
+
+            <a
+              href="/contact"
+              className="rp-btn"
+            >
+              <i className="ri-customer-service-2-line"></i>
+              Contact Support
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+    </>
+  );
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import Logo from "../assets/logo.png";
 
@@ -14,6 +15,7 @@ const LoginSignup = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [emailFocused, setEmailFocused] = useState(false);
+
 
   const {
     register,
@@ -87,6 +89,16 @@ const LoginSignup = () => {
 
   const [nameFocused, setNameFocused] =
     useState(false);
+
+
+  useEffect(() => {
+
+    document.title =
+      isSignup
+        ? "Create Account | Tecniqa"
+        : "Login | Tecniqa";
+
+  }, [isSignup]);
 
   return (
     <>
