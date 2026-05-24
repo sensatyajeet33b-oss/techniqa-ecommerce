@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import Logo from "../assets/logo.png";
 
 import {
@@ -35,11 +36,11 @@ const LoginSignup = () => {
       });
 
       if (!result.success) {
-        alert(result.message);
+        toast.error(result.message);
         return;
       }
 
-      alert("Account created successfully!");
+      toast.success("Account created successfully!");
 
       setIsSignup(false);
 
@@ -52,11 +53,11 @@ const LoginSignup = () => {
     );
 
     if (!result.success) {
-      alert(result.message);
+      toast.error(result.message);
       return;
     }
 
-    alert("Login successful!");
+    toast.success("Login successful!");
 
     const redirectTo =
       localStorage.getItem("postLoginRedirect") ||

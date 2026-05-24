@@ -130,7 +130,7 @@ export default function AboutUs() {
 1. CINEMATIC HERO
 ══════════════════════════════════════════════════════ */
 .au-hero {
-    margin-top: 65px;
+    margin-top: 4%;
     position: relative;
     height: clamp(560px, 88vh, 780px);
     overflow: hidden;

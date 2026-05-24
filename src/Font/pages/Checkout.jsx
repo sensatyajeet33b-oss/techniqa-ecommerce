@@ -60,7 +60,7 @@ const CSS = () => (
 
 /* ── Page ──────────────────────────────────── */
 .co-page {
-  margin-top: 70px;
+  margin-top: 4%;
   font-family: var(--fb);
   min-height: 100vh;
   background:
@@ -979,7 +979,21 @@ export default function Checkout() {
   }, []);
 
   /* Cart mutations */
-  const updateCart = (next) => { setCart(next); localStorage.setItem("cart", JSON.stringify(next)); };
+  const updateCart = (next) => {
+
+    setCart(next);
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(next)
+    );
+
+    // 🔥 notify whole app
+    window.dispatchEvent(
+      new Event("cartUpdated")
+    );
+
+  };
   const increase = (i) => { const c = [...cart]; c[i].qty += 1; updateCart(c); };
   const decrease = (i) => { const c = [...cart]; if (c[i].qty > 1) { c[i].qty -= 1; updateCart(c); } };
   const remove = (i) => updateCart(cart.filter((_, idx) => idx !== i));

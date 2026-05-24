@@ -97,7 +97,7 @@ const BannerCarousel = () => {
         @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap');
 
         /* ── Swiper Reset ── */
-        .bc-swiper { width: 100%; position: relative; margin-top:65px }
+        .bc-swiper { width: 100%; position: relative; margin-top:4% }
         .bc-swiper .swiper-slide { opacity: 0 !important; transition: opacity 0.9s ease !important; }
         .bc-swiper .swiper-slide-active { opacity: 1 !important; }
 

@@ -562,6 +562,7 @@
   .tq-footer-col {
     border-left: none !important;
     padding: 0 0 30px;
+    
     border-top: 1px solid var(--tq-border);
   }
 

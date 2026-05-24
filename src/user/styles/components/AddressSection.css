@@ -1,0 +1,144 @@
+﻿.ud-address-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.ud-address-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.ud-address-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.ud-address-card.active {
+  border-color: rgba(7, 147, 166, 0.48);
+  background: linear-gradient(135deg, #ffffff, var(--brand-soft));
+}
+
+.ud-address-top,
+.ud-address-foot,
+.ud-form-head,
+.ud-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.ud-address-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.ud-default-pill {
+  border-radius: 999px;
+  padding: 4px 9px;
+  color: #047857;
+  background: #d1fae5;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.ud-address-phone,
+.ud-address-body span {
+  color: var(--ink-mid);
+  font-size: 13px;
+}
+
+.ud-address-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.ud-address-actions button {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--ink-mid);
+  cursor: pointer;
+  transition: color 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.ud-address-actions button:hover:first-child {
+  color: var(--brand-dark);
+  background: var(--brand-soft);
+  border-color: rgba(7, 147, 166, 0.28);
+}
+
+.ud-address-actions button:hover:last-child {
+  color: #be123c;
+  background: #fff1f2;
+  border-color: #fecdd3;
+}
+
+.ud-address-body {
+  display: grid;
+  gap: 7px;
+  color: var(--ink-mid);
+  line-height: 1.6;
+}
+
+.ud-address-body p {
+  margin: 0;
+}
+
+.ud-address-form-wrap {
+  padding: 22px;
+}
+
+.ud-form-head {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.ud-form-head h3 {
+  margin: 0;
+  font-family: var(--font-display);
+}
+
+.ud-address-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ud-form-actions {
+  margin-top: 20px;
+  justify-content: flex-end;
+}
+
+@media (max-width: 860px) {
+  .ud-address-grid,
+  .ud-address-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .ud-address-top,
+  .ud-form-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .ud-address-actions {
+    align-self: flex-start;
+  }
+}

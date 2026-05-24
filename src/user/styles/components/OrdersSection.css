@@ -1,0 +1,132 @@
+﻿.ud-orders-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.ud-order-card {
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.ud-order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.ud-order-top,
+.ud-order-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 18px;
+}
+
+.ud-order-top {
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(7, 147, 166, 0.05), rgba(249, 115, 22, 0.03));
+}
+
+.ud-order-id {
+  margin-bottom: 4px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.ud-order-date {
+  color: var(--ink-mid);
+  font-size: 13px;
+}
+
+.ud-order-status {
+  border-radius: 999px;
+  padding: 7px 11px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.ud-order-products {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+}
+
+.ud-order-product {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+
+.ud-order-product img {
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  object-fit: cover;
+  background: var(--surface-soft);
+}
+
+.ud-order-product h4 {
+  overflow: hidden;
+  margin: 0 0 4px;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ud-order-product span,
+.ud-more-items,
+.ud-order-summary-box span {
+  color: var(--ink-mid);
+  font-size: 12.5px;
+}
+
+.ud-more-items {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--surface-soft);
+  font-weight: 800;
+}
+
+.ud-order-summaryary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding: 0 18px 18px;
+}
+
+.ud-order-summary-box {
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--surface-soft);
+}
+
+.ud-order-summary-box h4 {
+  margin: 4px 0 0;
+  font-size: 14px;
+}
+
+.ud-order-foot {
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 1040px) {
+  .ud-orders-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .ud-order-top,
+  .ud-order-foot {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .ud-order-summaryary {
+    grid-template-columns: 1fr;
+  }
+}

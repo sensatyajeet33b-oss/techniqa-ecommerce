@@ -84,6 +84,7 @@ export default function Header() {
     const [recentSearches, setRecentSearches] = useState([]);
     const [currentUser, setCurrentUser] = useState(getCurrentUser());
     const [showUserMenu, setShowUserMenu] = useState(false);
+    const [mobileUserMenu, setMobileUserMenu] = useState(false);
 
     /* Refs */
     const megaRef = useRef(null);
@@ -104,6 +105,34 @@ export default function Header() {
             }
         });
         try { setRecentSearches(JSON.parse(localStorage.getItem(RECENT_KEY)) || []); } catch { }
+    }, []);
+
+
+    useEffect(() => {
+
+        const closeMenu = (e) => {
+
+            if (
+                !e.target.closest(".hdr-user-wrap")
+            ) {
+
+                setMobileUserMenu(false);
+
+            }
+
+        };
+
+        document.addEventListener(
+            "click",
+            closeMenu
+        );
+
+        return () =>
+            document.removeEventListener(
+                "click",
+                closeMenu
+            );
+
     }, []);
 
     /* ── Scroll: compact + hide/reveal ── */
@@ -283,7 +312,7 @@ export default function Header() {
     /* ─────────────────────────────────────────────────────── */
     return (
         <>
-            <style>{`
+            <style>{` 
         *,
 *::before,
 *::after {
@@ -295,12 +324,12 @@ export default function Header() {
 .hdr-root {
     --brand: #0793a6;
     --brand-dk: #056577;
-    --brand-lt: #e0f7fa;
+    --brand-lt: #cdedff;
     --ink: #0f172a;
     --ink-mid: #475569;
     --ink-soft: #94a3b8;
     --surface: #ffffff;
-    --border: #e2e8f0;
+    --border: #adc4e1;
     --pill: 999px;
     --ff-b: 'DM Sans', sans-serif;
     --ff-d: 'Syne', sans-serif;
@@ -408,29 +437,81 @@ export default function Header() {
   position: relative;
 }
 
-.hdr-user-dropdown {
+.hdr-user-dropdown{
+    position:absolute;
 
-  position: absolute;
+    top:calc(100% + 14px);
+    right:0;
 
-  top: calc(100% + 3px);
-  right: 0;
+    width:240px;
 
-  width: 220px;
+    background:
+        rgba(255,255,255,.94);
 
-  background: white;
+    backdrop-filter:blur(15px);
 
-  border: 1px solid var(--border);
+    border:
+        1px solid rgba(255,255,255,.45);
 
-  border-radius: 16px;
+    border-radius:22px;
 
-  box-shadow:
-    0 20px 40px rgba(15,23,42,.12);
+    box-shadow:
+        0 18px 50px rgba(15,23,42,.12),
+        0 4px 18px rgba(15,23,42,.06);
 
-  overflow: hidden;
+    padding:10px;
 
-  z-index: 2000;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
 
-  animation: hdrDropdown .22s ease;
+    animation:dropdownFade .22s ease;
+
+    overflow:hidden;
+    z-index: 2000;
+}
+
+.hdr-user-dropdown button{
+    width:100%;
+
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    padding:14px 16px;
+
+    border:none;
+    background:transparent;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:14px;
+    font-weight:600;
+
+    color:var(--ink);
+
+    transition:
+        background .2s,
+        transform .2s;
+}
+
+.hdr-user-dropdown button:hover{
+    background:
+        rgba(7,147,166,.08);
+
+    color:var(--brand);
+
+    transform:translateX(4px);
+}
+
+.hdr-user-dropdown button.logout{
+    color:#ef4444;
+}
+
+.hdr-user-dropdown button.logout:hover{
+    background:rgba(239,68,68,.08);
 }
 
 @keyframes hdrDropdown {
@@ -1228,7 +1309,7 @@ export default function Header() {
 
 .hdr-mega-col-link:hover {
     color: var(--brand);
-    padding-left: 10px
+    padding-left: 18px;
 }
 
 .hdr-mega-col-link:hover::before {
@@ -1780,6 +1861,16 @@ export default function Header() {
     box-shadow: 0 14px 32px rgba(7, 147, 166, .42)
 }
 
+
+.hdr-user-divider{
+
+    height:1px;
+
+    background:var(--border);
+
+    margin:3px 0;
+}
+
 .hdr-btn-primary:hover::after {
     left: 160%
 }
@@ -2062,6 +2153,17 @@ export default function Header() {
   .hdr-util {
     display: none;
   }
+    .hdr-user-dropdown{
+
+    position: fixed;
+
+    top: 72px;
+    right: 14px;
+
+    width: 220px;
+
+    z-index: 3000;
+}
 
   .hdr-main {
     padding: 10px 14px;
@@ -2464,21 +2566,32 @@ export default function Header() {
 
                         {/* Actions */}
                         <div className="hdr-actions">
-                            <div
-                                className="hdr-user-wrap"
-
-                                onMouseEnter={() =>
-                                    setShowUserMenu(true)
-                                }
-
-                                onMouseLeave={() =>
-                                    setShowUserMenu(false)
-                                }
-                            >
+                            <div className="hdr-user-wrap">
 
                                 <button
                                     className="hdr-action-btn"
-                                     
+
+                                    onClick={() => {
+
+                                        if (window.innerWidth <= 768) {
+
+                                            setMobileUserMenu(
+                                                !mobileUserMenu
+                                            );
+
+                                        }
+
+                                    }}
+
+                                    onMouseEnter={() => {
+
+                                        if (window.innerWidth > 768) {
+
+                                            setShowUserMenu(true);
+
+                                        }
+
+                                    }}
                                 >
 
                                     <i className="ri-user-line" />
@@ -2493,9 +2606,21 @@ export default function Header() {
 
                                 </button>
 
-                                {showUserMenu && (
+                                {(showUserMenu || mobileUserMenu) && (
 
-                                    <div className="hdr-user-dropdown">
+                                    <div
+                                        className="hdr-user-dropdown"
+
+                                        onMouseLeave={() => {
+
+                                            if (window.innerWidth > 768) {
+
+                                                setShowUserMenu(false);
+
+                                            }
+
+                                        }}
+                                    >
 
                                         {!currentUser ? (
 
@@ -2519,31 +2644,68 @@ export default function Header() {
 
                                             <>
 
-                                                <button>
-                                                    My Profile
-                                                </button>
-
-                                                <button>
-                                                    My Addresses
-                                                </button>
-
                                                 <button
-                                                    onClick={() =>
-                                                        navigate("/wishlist")
-                                                    }
+                                                    onClick={() => {
+
+                                                        navigate("/user/dashboard?tab=dashboard");
+
+                                                        setMobileUserMenu(false);
+                                                        setShowUserMenu(false);
+
+                                                    }}
                                                 >
-                                                    Wishlist
+
+                                                    <i className="ri-user-line" />
+
+                                                    <span>My Dashboard</span>
+
                                                 </button>
 
-                                                <button>
-                                                    Orders
-                                                </button>
 
                                                 <button
-                                                    onClick={handleLogout}
+                                                    onClick={() => {
+
+                                                        navigate("/user/dashboard?tab=addresses");
+
+                                                        setMobileUserMenu(false);
+                                                        setShowUserMenu(false);
+
+                                                    }}
+                                                >
+
+                                                    <i className="ri-map-pin-line" />
+
+                                                    <span>Saved Address</span>
+
+                                                </button>
+
+
+                                                <button
+                                                    onClick={() => {
+
+                                                        navigate("/user/dashboard?tab=orders");
+
+                                                        setMobileUserMenu(false);
+                                                        setShowUserMenu(false);
+
+                                                    }}
+                                                >
+                                                    <i className="ri-shopping-bag-line" />
+                                                    <span>Orders</span>
+                                                </button>
+
+                                                <div className="hdr-user-divider" />
+
+                                                <button
                                                     className="logout"
+
+                                                    onClick={handleLogout}
                                                 >
-                                                    Logout
+
+                                                    <i className="ri-logout-box-r-line" />
+
+                                                    <span>Logout</span>
+
                                                 </button>
 
                                             </>
@@ -2555,8 +2717,12 @@ export default function Header() {
                                 )}
 
                             </div>
+
+
+
                             <div className="hdr-divider" />
-                            {/* <button
+
+                            <button
                                 className="hdr-action-btn"
                                 style={{ position: "relative" }}
                                 onClick={() => navigate("/wishlist")}
@@ -2572,7 +2738,7 @@ export default function Header() {
                                         {wishlistCount}
                                     </span>
                                 )}
-                            </button> */}
+                            </button>
                             <button className={`hdr-action-btn${cartShake ? " hdr-cart-shake" : ""}`} style={{ position: "relative" }} onClick={() => setCartOpen(true)}>
                                 <i className="ri-shopping-cart-2-line" />
                                 <span className="hdr-action-label">Cart</span>
