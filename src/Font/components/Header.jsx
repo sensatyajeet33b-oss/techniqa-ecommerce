@@ -1019,6 +1019,38 @@ export default function Header() {
     }
 }
 
+.hdr-cart-item{
+    position:relative;
+
+    transition:
+      transform .2s,
+      box-shadow .2s,
+      border-color .2s;
+}
+
+.hdr-cart-item:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+      0 10px 24px rgba(15,23,42,.06);
+
+    border-color:
+      rgba(7,147,166,.18);
+}
+
+.hdr-cart-item-img{
+    width:72px;
+    height:72px;
+
+    object-fit:cover;
+
+    border-radius:14px;
+
+    background:#fff;
+
+    padding:6px;
+}
+
 /* Cart icon shake */
 .hdr-cart-shake {
     animation: hdrShake .55s cubic-bezier(.36, .07, .19, .97) both;
@@ -1731,11 +1763,11 @@ export default function Header() {
 .hdr-qty-ctrl {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    background: #fff;
-    border: 1.5px solid #e2e8f0;
+    gap: 8px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
     border-radius: 25px;
-    padding: 3px 8px;
+    padding: 4px;
     margin-top: 9px
 }
 
@@ -1744,7 +1776,7 @@ export default function Header() {
     height: 26px;
     border-radius: 50%;
     border: none;
-    background: #f1f5f9;
+    background: #f8fafc;
     cursor: pointer;
     font-size: 14px;
     font-weight: 700;
